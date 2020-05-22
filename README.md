@@ -6,5 +6,6 @@ This Repository is Incomplete ⚠️
 
 - [x] ~~Problem Post Number and Name~~
 - [x] ~~Problems Solved Date~~
+- [ ] Problems Scoring Number
 - [ ] Problems Solved User
 - [ ] User Total Problems
