@@ -23,19 +23,99 @@ namespace BOJ_Discord_Bot.BOJ_Crawler.Information
 
         public string GetSolvedProblem()
         {
-            return InfoTableList(InfoTable(request))[1]
-                .Split("<td>")[1].Split("<td>")[0];
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[1]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetSubmit()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[2]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetSuccess()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[3]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetFailed()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[4]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetTimeout()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[5]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetMemoryOut()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[6]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetOutputExceeded()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[7]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetRuntimeError()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[8]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetCompileError()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[9]
+                .Split("<td>")[1].Split("</td>")[0]);
+        }
+
+        public string GetOrganization()
+        {
+            return RemoveHTML(
+                InfoTableList(
+                    InfoTable(request)
+                )[10]
+                .Split("<td>")[1].Split("</td>")[0]);
         }
 
 
-        private string RemoveLink(string content)
+
+        private string RemoveHTML(string content)
         {
-            Regex regex = new Regex("<a[^>]*>(.*?)</a>",
-                RegexOptions.IgnoreCase);
-            return null; //content.Split("<a href")[1].Split(">")[0];
-            
-            string _() => regex.Match(content).Success ? return null: return null;
-        
+            return Regex.Replace(content, "<.*?>|&.*?;", string.Empty);
         }
 
         private string InfoTable(string request)
@@ -65,7 +145,8 @@ namespace BOJ_Discord_Bot.BOJ_Crawler.Information
             {
                 list.Add(table.Split("<tr")[i]
                     .Split("</tr>")[0].Trim() // content
-                    .Replace("\t", "")); // remove space letter
+                    .Replace("\t", string.Empty)
+                    .Replace("\n", string.Empty)); // remove space letter
             }
 
             return list;
