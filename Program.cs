@@ -1,17 +1,16 @@
-﻿// using System;
-// using BOJ_Crawler.Information;
+﻿using System;
+using OJ;
 
-// namespace BOJ_Crawler
-// {
-//     class Program
-//     {
-//         static void Main(string[] args)
-//         {
-//             string user = Console.ReadLine();
-//             var info = new Problem(user);
-
-//             for (int i = 0; i<=10;i++)
-//                 Console.WriteLine(string.Format(info.problem[i]+" / "+info.language[i]+" / "+info.date[i]));
-//         }
-//     }
-// }
+namespace BOJ_Crawler
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var oj = new Crawl(OJType.Baekjoon, "spy");
+            
+            Console.WriteLine($"랭킹: {oj.GetRank}");
+            Console.WriteLine($"틀린 횟수: {oj.GetFail}");
+        }
+    }
+}
