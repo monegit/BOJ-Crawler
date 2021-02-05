@@ -7,44 +7,28 @@ namespace OJ.Data.Baekjoon
 {
     internal class Baekjoon : IOnlineJudge
     {
-        Dictionary<string, string> info = new();
-        WebClient wc = new();
+        private Dictionary<string, string> data = new();
 
         internal Baekjoon(string name)
         {
-            var document = new HtmlAgilityPack.HtmlDocument();
-            var c = new WebClient().DownloadString($"https://www.acmicpc.net/user/{name}");
-            document.LoadHtml(c);
-            var a = document.DocumentNode.SelectSingleNode("//*[@id='statics']/tbody");
-
-            foreach (var item in a.SelectNodes("tr"))
-            {
-                info.Add(item.SelectSingleNode("th").InnerText.Trim(), item.SelectSingleNode("td").InnerText.Trim());
-            }
+            data = Crawl.Baekjoon.GetDictionary(name);
         }
 
-        public string GetRank => info["랭킹"];
-
-        public int GetFail => int.Parse(info["틀렸습니다"]);
-
-        public int GetHalfSolved(string name)
+        private string GetValue(string key)
         {
-            throw new NotImplementedException();
+            return data.ContainsKey(key) ? data[key] : "정보 없음";
         }
 
-        public int GetSolved(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetRank => GetValue(KeyType.Rank);
 
-        public int GetSolvedAll(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetSolved => GetValue(KeyType.Solved);
 
-        public int GetSubmit(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetHalfSolved => GetValue(KeyType.HalfSolved);
+
+        public string GetSubmit => GetValue(KeyType.Submit);
+
+        public string GetSolvedAll => GetValue(KeyType.SolvedAll);
+
+        public string GetFail => GetValue(KeyType.Fail);
     }
 }
