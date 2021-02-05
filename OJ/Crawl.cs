@@ -22,26 +22,14 @@ namespace OJ
 
         public string GetRank => (type as IOnlineJudge).GetRank;
 
-        public int GetFail => (type as IOnlineJudge).GetFail;
+        public string GetSolved => (type as IOnlineJudge).GetSolved;
 
-        public int GetHalfSolved(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetHalfSolved => (type as IOnlineJudge).GetHalfSolved;
 
-        public int GetSolved(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetSubmit => (type as IOnlineJudge).GetSubmit;
 
-        public int GetSolvedAll(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetSolvedAll => (type as IOnlineJudge).GetSolvedAll;
 
-        public int GetSubmit(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetFail => (type as IOnlineJudge).GetFail;
     }
 }
