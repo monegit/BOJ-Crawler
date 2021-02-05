@@ -8,7 +8,8 @@ namespace BOJ_Crawler
     {
         static void Main(string[] args)
         {
-            var oj = new Crawl(OJType.Baekjoon, "spy");
+            var name = Console.ReadLine();
+            var oj = new Crawl(OJType.Baekjoon, name);
 
             Console.WriteLine($"{KeyType.Rank}: {oj.GetRank}");
             Console.WriteLine($"{KeyType.Fail}: {oj.GetFail}");
